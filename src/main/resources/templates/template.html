@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable List with Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 2px 0px 0px 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-flex mt-4" style="font-size: medium; padding: 5px">
+    <div class="row">
+        <div class="col-5">
+            <ul th:fragment="printNodes(nodes)">
+                <li th:each="node,index: ${nodes}" th:with="refId=${node.id+index.index}">
+                    <a data-bs-toggle="collapse" th:href="${node.data == null ? '#'+refId : '#showContent'}" role="button"
+                       aria-expanded="false" th:text="${node.name}"></a>
+                    <ul th:if="${node.childNodes != null}"
+                        th:replace="fragments :: printNodes(${node.childNodes})"></ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-7">
+            <textarea class="collapse" id="showContent"></textarea>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript (optional, for certain components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function getData(data) {
+        if(data != undefined) {
+            document.getElementById("showContent").textContent = data;
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<ul th:if="${node.childNodes != null}" class="collapse" th:id="${refId}" th:fragment="printNodes(nodes)">
+    <li th:each="node,index: ${nodes}" th:with="refId=${node.id+index.index}">
+        <a data-bs-toggle="collapse" th:href="${node.data == null ? '#'+refId : '#showContent'}" role="button"
+           aria-expanded="false" th:text="${node.name}"></a>
+        <ul th:if="${node.childNodes != null}" class="collapse"
+            th:replace="fragments :: printNodes(${node.childNodes})"></ul>
+    </li>
+</ul>

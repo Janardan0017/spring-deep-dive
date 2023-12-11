@@ -1,0 +1,19 @@
+{
+  "name": "dev",
+  "childNodes": [
+    {
+      "name": "resources",
+      "childNodes": [
+        {
+          "name": "com",
+          "childNodes": [
+            {
+              "name": "travelport",
+              "childNodes": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
